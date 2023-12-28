@@ -1,5 +1,5 @@
 # Weather App
-
+## Current release is avaliable (Android 11+): https://drive.google.com/file/d/1d1K_u2OVxKtLAEyE_8hjQDHpuuatj7_u/view?usp=sharing
 # Overview
 Welcome to the WeatherApp repository. This application is a simple, cross-platform weather application developed using .NET MAUI.
 # Key features
