@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherApp"
+    x:Name="MainPagePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToStringValueConverter x:Key="BoolToStringValueConverter" />
+            <local:BoolToStringValueConverter2 x:Key="BoolToStringValueConverter2" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RefreshView
+        x:Name="RefreshViewObj2"
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView>
+
+            <VerticalStackLayout x:Name="AppLayout" Background="{StaticResource backgroundGradient}">
+
+
+                <VerticalStackLayout x:Name="TopLayout">
+                    <Label
+                        Margin="0,50,0,0"
+                        FontFamily="OpenSansRegular"
+                        FontSize="36"
+                        HorizontalOptions="Center"
+                        Text="{Binding CityName}" />
+                    <Label
+                        x:Name="LabelTemperature"
+                        FontFamily="OpenSansSemiBold"
+                        FontSize="60"
+                        HorizontalOptions="Center">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0}{1}">
+                                <Binding Path="CurrentTemperature" />
+                                <Binding Converter="{StaticResource BoolToStringValueConverter}" Path="Fahrenheit" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+
+                    <Image Source="{Binding WeatherIcon}" WidthRequest="200" />
+                    <Label
+                        FontFamily="OpenSansRegular"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="{Binding WeatherDescription}" />
+                </VerticalStackLayout>
+                <Frame
+                    Margin="20,10,20,10"
+                    Padding="0"
+                    BackgroundColor="#E3F4FE"
+                    CornerRadius="16"
+                    HasShadow="True"
+                    HeightRequest="100">
+                    <Frame.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.9"
+                            Radius="50"
+                            Offset="40,40" />
+                    </Frame.Shadow>
+                    <CollectionView x:Name="ForecastView" BackgroundColor="Transparent">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="10,10,10,10" HeightRequest="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height=".4*" />
+                                        <RowDefinition Height=".2*" />
+                                        <RowDefinition Height=".4*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        FontSize="20"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Time}" />
+                                    <Image
+                                        Grid.Row="1"
+                                        HeightRequest="30"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding Weathercode}"
+                                        VerticalOptions="Center" />
+
+
+                                    <Label
+                                        Grid.Row="2"
+                                        FontSize="24"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Temperature, StringFormat='{0}°'}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+
+
+
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+
+                <Grid
+                    x:Name="ExtraInfoGrid"
+                    Margin="10,10,10,0"
+                    ColumnSpacing="30"
+                    HorizontalOptions="Center"
+                    RowSpacing="0"
+                    VerticalOptions="StartAndExpand">
+                    <Grid.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.1"
+                            Radius="10"
+                            Offset="20,20" />
+                    </Grid.Shadow>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+
+                        <ColumnDefinition Width="Auto" />
+
+                    </Grid.ColumnDefinitions>
+
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        Padding="10"
+                        BackgroundColor="#4E87D7"
+                        CornerRadius="16"
+                        HeightRequest="150"
+                        WidthRequest="150">
+
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding Precipitation, StringFormat='{0}mm'}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="Rain"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        Padding="10"
+                        BackgroundColor="#4E87D7"
+                        CornerRadius="10"
+                        HeightRequest="150"
+                        WidthRequest="150">
+
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding Humidity, StringFormat='{0}%'}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="Humidity"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+
+
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,20,0,0"
+                        Padding="10"
+                        BackgroundColor="#4E87D7"
+                        CornerRadius="10"
+                        HeightRequest="150"
+                        WidthRequest="150">
+
+                        <VerticalStackLayout>
+                            <Label
+                                x:Name="LabelWind"
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                TextColor="White">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}{1}">
+                                        <Binding Path="WindSpeed" />
+                                        <Binding Converter="{StaticResource BoolToStringValueConverter2}" Path="MilesPerHour" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="Wind speed"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,20,0,0"
+                        Padding="10"
+                        BackgroundColor="#4E87D7"
+                        CornerRadius="10"
+                        HeightRequest="150"
+                        WidthRequest="150">
+
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding Sunrise}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="Sunrise"
+                                TextColor="White" />
+
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding Sunset}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="Sunset"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

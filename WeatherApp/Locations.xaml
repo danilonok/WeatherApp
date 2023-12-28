@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp.Locations"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherApp"
+    x:Name="ThisPage"
+    Title="Locations">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToStringValueConverter x:Key="BoolToStringValueConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <RefreshView
+            x:Name="RefreshViewObj"
+            Command="{Binding RefreshCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <VerticalStackLayout>
+                <FlexLayout
+                    Margin="20,10,20,0"
+                    AlignItems="Stretch"
+                    Direction="Row"
+                    JustifyContent="SpaceBetween">
+
+
+                    <ImageButton
+                        Clicked="OnAddButtonClicked"
+                        HeightRequest="30"
+                        HorizontalOptions="End"
+                        Source="{StaticResource Add}"
+                        WidthRequest="30" />
+                </FlexLayout>
+                <Label
+                    Margin="20,10"
+                    FontSize="32"
+                    Text="Locations" />
+
+                <CollectionView
+                    x:Name="LocationView"
+                    Margin="20,0"
+                    ItemsLayout="VerticalList"
+                    ItemsSource="{Binding Locations}"
+                    VerticalOptions="FillAndExpand">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Invoked="OnDeleteSwipeItemInvoked" Text="Delete" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <StackLayout>
+                                    <Frame
+                                        Margin="3"
+                                        Padding="20"
+                                        BackgroundColor="#EEEEEE">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Location Name  -->
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding Name}"
+                                                VerticalOptions="Center" />
+
+                                            <StackLayout Grid.Column="1">
+                                                <!--  Temperature  -->
+                                                <!--  -Text="{Binding LastTemperature, StringFormat='{0}°'}"  -->
+                                                <Label
+                                                    FontSize="18"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Center">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0}{1}">
+                                                            <Binding Path="LastTemperature" />
+                                                            <Binding
+                                                                Converter="{StaticResource BoolToStringValueConverter}"
+                                                                Path="ViewModel.Fahrenheit"
+                                                                Source="{x:Reference ThisPage}" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+
+
+
+                                            </StackLayout>
+                                        </Grid>
+
+                                    </Frame>
+                                </StackLayout>
+
+                                <!--    </Frame> -->
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </RefreshView>
+    </ScrollView>
+</ContentPage>

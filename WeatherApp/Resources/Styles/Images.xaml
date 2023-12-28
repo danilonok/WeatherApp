@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Resources.Styles.Images">
+    <!-- Images -->
+    <x:String x:Key="Sunny">sun.png</x:String>
+    <x:String x:Key="Cloudy">cloudy.png</x:String>
+    <x:String x:Key="Rain">rain.png</x:String>
+    <x:String x:Key="Wind">wind.png</x:String>
+    <x:String x:Key="Snow">snow.png</x:String>
+    <x:String x:Key="Thunder">storm.png</x:String>
+    <x:String x:Key="Freezing_Rain">freezing_rain.png</x:String>
+    
+    <x:String x:Key="Home">home.png</x:String>
+    <x:String x:Key="Location">location.png</x:String>
+    <x:String x:Key="Settings">settings.png</x:String>
+    <x:String x:Key="Add">add.png</x:String>
+    <x:String x:Key="Edit">edit.png</x:String>
+</ResourceDictionary>

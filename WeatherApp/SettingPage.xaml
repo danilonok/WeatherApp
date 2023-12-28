@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp.SettingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SettingPage">
+    <VerticalStackLayout>
+
+        <Label
+            Margin="20,10"
+            FontSize="32"
+            Text="Settings" />
+
+
+        <FlexLayout
+            Margin="20,10,20,0"
+            AlignItems="Stretch"
+            Direction="Row"
+            JustifyContent="SpaceBetween">
+            <Label
+                FontSize="24"
+                Text="Temperature units"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout>
+                <Label
+                    FontSize="24"
+                    Text="°C"
+                    VerticalOptions="Center" />
+                <Switch
+                    HorizontalOptions="End"
+                    IsToggled="{Binding Fahrenheit}"
+                    Toggled="FahrenheitToggled"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="24"
+                    Text="°F"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </FlexLayout>
+        <FlexLayout
+            Margin="20,10,9,0"
+            AlignItems="Stretch"
+            Direction="Row"
+            JustifyContent="SpaceBetween">
+            <Label
+                FontSize="24"
+                Text="Speed units"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout>
+                <Label
+                    FontSize="18"
+                    Text="Km/h"
+                    VerticalOptions="Center" />
+                <Switch
+                    HorizontalOptions="End"
+                    IsToggled="{Binding MilesPerHour}"
+                    Toggled="MilesToggled"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="18"
+                    Text="M/h"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </FlexLayout>
+        <FlexLayout
+            Margin="20,10,20,0"
+            AlignItems="Stretch"
+            Direction="Row"
+            JustifyContent="SpaceBetween">
+            <Label
+                FontSize="24"
+                Text="Delete user data"
+                VerticalOptions="Center" />
+            <Button
+                Margin="0,0,5,0"
+                BackgroundColor="Red"
+                Pressed="Button_Pressed"
+                Text="Delete" />
+        </FlexLayout>
+    </VerticalStackLayout>
+</ContentPage>
